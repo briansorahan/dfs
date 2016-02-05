@@ -63,12 +63,10 @@ func TopologicalSort(root Vertex, options Options) []interface{} {
 
 	Visit(root, visitor, options)
 
-	var (
-		numVals = len(vals)
-		ret     = make([]interface{}, numVals)
-	)
-	for i, val := range vals {
-		ret[numVals-1-i] = val
+	for i := 0; i < len(vals)/2; i++ {
+		tmp := vals[i]
+		vals[i] = vals[len(vals)-i-1]
+		vals[len(vals)-i-1] = tmp
 	}
-	return ret
+	return vals
 }
